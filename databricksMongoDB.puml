@@ -1,0 +1,60 @@
+skinparam headerFontSize 40
+skinparam HeaderFontColor black
+header transaction level intelligence /abstract view
+skinparam sequence {
+    ArrowColor black
+    LifeLineBorderColor black
+    LifeLineBackgroundColor black
+    LifeLineBorderColor black
+    LifeLineBackgroundColor #ffbd00
+
+    'ParticipantBorderColor #lightgreen
+    'ParticipantBackgroundColor #lightgreen
+    ParticipantFontName "Arial"
+    ParticipantFontSize 17
+    ParticipantFontColor black
+    'ParticipantMargin 30 '\n Heritage service
+
+    ActorBorderColor black
+    ActorBackgroundColor #black
+}
+
+
+
+participant "Event Data " as a
+'box "Databricks" '#LightSlateGray
+box "Databricks" 
+participant "mlFlow" as b
+participant "Data Warehouse:Delta Lake" as c
+
+end box
+box "MongoDB" #lightgreen
+
+participant "Atlas:ODS" as d 
+end box
+participant "Activate Insights: Channels" as e
+
+autonumber 1.1
+a->b: event data is posted
+b->b: model trained
+b->d: Upserts reference data at a predefined interval /collection
+note left: 1.1 & 1.4 parallel acvitivities 
+
+a->c: event data is posted
+c->c: event data is normalized for comparision(ex gecoded)
+c->d: inserts normalized event data/collection
+autonumber 2.1
+b->d: find if event is anomalous /defined rules
+alt mfFlow activation
+b->e: activate anomalous events on cross channels (ex fraud detected)
+else Atlas change stream 
+d->e: change stream on cross channels
+end
+
+
+
+
+
+
+
+

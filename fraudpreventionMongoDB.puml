@@ -1,0 +1,68 @@
+skinparam headerFontSize 40
+skinparam HeaderFontColor black
+'header Mobile Payments (Happy Path)
+skinparam sequence {
+    ArrowColor black
+    LifeLineBorderColor black
+    LifeLineBackgroundColor black
+    LifeLineBorderColor black
+    LifeLineBackgroundColor #ffbd00
+
+    'ParticipantBorderColor #lightgreen
+    'ParticipantBackgroundColor #lightgreen
+    ParticipantFontName "Arial"
+    ParticipantFontSize 17
+    ParticipantFontColor black
+    'ParticipantMargin 30 '\n Heritage service
+
+    ActorBorderColor black
+    ActorBackgroundColor #black
+}
+
+autonumber 1
+participant "Mobile Device" as a #lightgreen
+participant "Card Transaction " as b 
+participant "Kafka/Azure Event Hub/AWS Kiensis " as c
+'box "Databricks" '#LightSlateGray
+box "Databricks" 
+participant "mlFlow" as f
+participant "Delta Lake" as g
+end box
+participant "Fraud Monitoring" as h
+
+participant "Atlas:ODS" as d #lightgreen 
+
+participant "Realm Sync App" as e #lightgreen 
+
+
+
+a->b: post trasnsaction
+b->c: new trasnsaction event
+c-[#blue]>g: insert raw transactions
+activate g
+
+g->g: Geospatial clustering 
+g->g: determine user behaviour
+g-[#green]>d: insert user behavior data
+c-[#blue]>f: insert raw transactions
+
+deactivate g
+note left: 3 & 7 are parallel activities
+
+activate f
+
+f->f: update model, generate new reference data points
+f-[#green]>d: periodically push new reference data \n import com.mongodb.spark._
+f->d: find if there is a match \n db.tiles.find({"user": "Antoine", "tile": "8A2A1008916FFFF"})
+deactivate f
+alt  if there is a match (transaction is fraudulent)
+d->h: trigger change stream 
+h->h: create a case
+
+d->e:  trigger change stream
+e->a: transaction failed message
+end
+
+
+
+
