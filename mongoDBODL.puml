@@ -50,12 +50,15 @@ b->microdb: long running\ntransaction state
 b->model: Validate payement
 model->microdb: retrieve blacklist
 deactivate b
+box "backend"
+participant backend 
+end box
+
 b-->backend: initiate payment
-backend->DB2
 participant "ODL" as ODL #lightgreen
-DB2->ODL
+backend->ODL: CDC
 activate b
-ODL->b
+ODL->b: Trigger
 b->microdb: device sync
 deactivate b
 
