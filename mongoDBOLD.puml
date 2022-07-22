@@ -41,17 +41,23 @@ end box
 'participant "Realm Sync App" as e #lightgreen 
 
 activate a
-a->realm: record request
+a->realm: record\npayment request
 deactivate a
 activate b
-a->b: : initiate long\nrunning transaction
+a->b: : initiate payment\nlong running\ntransaction
 b->microdb: long running\ntransaction state
 deactivate b
 b-->backend: initiate payment
 backend->DB2
+participant "ODL" as ODL #lightgreen
 DB2->ODL
-ODL->realm: device sync
-realm->a: UI update
+activate b
+ODL->b
+b->microdb: device sync
+deactivate b
+
+microdb-->realm
+realm-->a: UI update
 
 'b->c: new trasnsaction event
 'c-[#blue]>g: insert raw transactions
