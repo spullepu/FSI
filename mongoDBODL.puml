@@ -41,6 +41,7 @@ end box
 
 'participant "Realm Sync App" as e #lightgreen 
 
+== Operational Flow ==
 activate a
 a->realm: record\npayment request
 deactivate a
@@ -65,12 +66,14 @@ deactivate b
 microdb-->realm
 realm-->a: UI update
 
+== Model Training ==
 participant "Databricks" as dbr #lightgrey
+
 activate dbr
 dbr->ODL: query payments
 ' should model params be stored in MongoDB
 dbr->dbr: calculate blacklist
-dbr->microdb: store blacklist
+dbr->microdb --: store blacklist
 deactivate dbr
 
 'b->c: new trasnsaction event
