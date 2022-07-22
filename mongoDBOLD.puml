@@ -27,6 +27,7 @@ end box
 box "microservice"
 participant "API" as b 
 participant "state db" as microdb #lightgreen
+participant "AML Detection\nFunction" as model
 end box
 'participant "Kafka/Azure Event Hub/AWS Kiensis " as c
 'box "Databricks" '#LightSlateGray
@@ -46,6 +47,8 @@ deactivate a
 activate b
 a->b: : initiate payment\nlong running\ntransaction
 b->microdb: long running\ntransaction state
+b->model: Validate payement
+model->microdb: retrieve blacklist
 deactivate b
 b-->backend: initiate payment
 backend->DB2
@@ -58,6 +61,14 @@ deactivate b
 
 microdb-->realm
 realm-->a: UI update
+
+participant "Databricks" as dbr #lightgrey
+activate dbr
+dbr->ODL: query payments
+' should model params be stored in MongoDB
+dbr->dbr: calculate blacklist
+dbr->microdb: store blacklist
+deactivate dbr
 
 'b->c: new trasnsaction event
 'c-[#blue]>g: insert raw transactions
