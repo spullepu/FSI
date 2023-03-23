@@ -1,16 +1,16 @@
 //1. book a trade and delta hedge in a single document /eliminated multi-doc transaction
 {
-    "_id": ObjectId("<portfolio_id>"),
+    "_id": New ObjectId("<portfolio_id>"),
     "name": "<portfolio_name>",
     "trades": [
        {
-          "_id": ObjectId("<trade_id_1>"),
+          "_id": New ObjectId("<trade_id_1>"),
           "product": "<fx_product_1>",
           "direction": "<trade_direction_1>",
           "quantity": <trade_quantity_1>,
           "price": <trade_price_1>,
-          "trade_date": ISODate("<trade_date_1>"),
-          "maturity_date": ISODate("<maturity_date_1>"),
+          "trade_date": New Date("<trade_date_1>"),
+          "maturity_date": New Date("<maturity_date_1>"),
           "underlying_price": <underlying_price_1>,
           "delta": <delta_1>,
           "gamma": <gamma_1>,
@@ -21,7 +21,7 @@
                 "hedge_id": "<hedge_id_1_1>",
                 "hedge_quantity": <hedge_quantity_1_1>,
                 "hedge_price": <hedge_price_1_1>,
-                "hedge_date": ISODate("<hedge_date_1_1>"),
+                "hedge_date": New Date("<hedge_date_1_1>"),
                 "hedge_type": "<hedge_type_1_1>"
              }
           ]
@@ -29,20 +29,21 @@
     ]
  }
  
-//2.  Exotics trades have 2 hedges, one for the delta and one for the vega //. How about updates? downsize transaction 
+ //2.  Exotics trades have 2 hedges, one for the delta and one for the vega
+//3. How about updates? downsize transaction 
 
 {
-    "_id": ObjectId("<portfolio_id>"),
+    "_id": New ObjectId("<portfolio_id>"),
     "name": "<portfolio_name>",
     "trades": [
        {
-          "_id": ObjectId("<trade_id_1>"),
+          "_id": New ObjectId("<trade_id_1>"),
           "product": "<fx_product_1>",
           "direction": "<trade_direction_1>",
           "quantity": <trade_quantity_1>,
           "price": <trade_price_1>,
-          "trade_date": ISODate("<trade_date_1>"),
-          "maturity_date": ISODate("<maturity_date_1>"),
+          "trade_date": New Date("<trade_date_1>"),
+          "maturity_date": New Date("<maturity_date_1>"),
           "underlying_price": <underlying_price_1>,
           "delta": <delta_1>,
           "gamma": <gamma_1>,
@@ -53,14 +54,14 @@
                 "hedge_id": "<hedge_id_1_1>",
                 "hedge_quantity": <hedge_quantity_1_1>,
                 "hedge_price": <hedge_price_1_1>,
-                "hedge_date": ISODate("<hedge_date_1_1>"),
+                "hedge_date": New Date("<hedge_date_1_1>"),
                 "hedge_type": "<hedge_type_1_1>"
              },
              {
                 "hedge_id": "<hedge_id_1_2>",
                 "hedge_quantity": <hedge_quantity_1_2>,
                 "hedge_price": <hedge_price_1_2>,
-                "hedge_date": ISODate("<hedge_date_1_2>"),
+                "hedge_date": New Date("<hedge_date_1_2>"),
                 "hedge_type": "<hedge_type_1_2>"
              }
           ]
@@ -72,49 +73,49 @@
 //To atomically delete A and B and insert C, 
 //*******before netting************
 {
-    "_id": ObjectId("614fd1a7d06a6fc2f7fcfd06"), // Unique ID for the portfolio document
+    "_id": New ObjectId("614fd1a7d06a6fc2f7fcfd06"), // Unique ID for the portfolio document
     "name": "My FX Portfolio", // Name of the portfolio
     "description": "A portfolio containing two FX trades", // Description of the portfolio
     "trades": [
        {
-          "_id": ObjectId("614fd1a7d06a6fc2f7fcfd07"), // Unique ID for the trade document
+          "_id": New ObjectId("614fd1a7d06a6fc2f7fcfd07"), // Unique ID for the trade document
           "type": "FX", // Type of trade
           "symbol": "EUR/USD", // Currency pair symbol
           "quantity": 10000, // Quantity of currency traded
           "direction": "buy", // Direction of trade
           "price": 1.1700, // Price at which trade was executed
-          "date": ISODate("2021-09-27T15:00:00Z") // Date and time of trade execution
+          "date": New Date("2021-09-27T15:00:00Z") // Date and time of trade execution
        },
        {
-          "_id": ObjectId("614fd1a7d06a6fc2f7fcfd08"), // Unique ID for the trade document
+          "_id": New ObjectId("614fd1a7d06a6fc2f7fcfd08"), // Unique ID for the trade document
           "type": "FX", // Type of trade
           "symbol": "GBP/USD", // Currency pair symbol
           "quantity": 5000, // Quantity of currency traded
           "direction": "sell", // Direction of trade
           "price": 1.3800, // Price at which trade was executed
-          "date": ISODate("2021-09-28T09:30:00Z") // Date and time of trade execution
+          "date": New Date("2021-09-28T09:30:00Z") // Date and time of trade execution
        }
     ],
-    "created_at": ISODate("2021-09-24T10:30:00Z"), // Date and time portfolio was created
-    "updated_at": ISODate("2021-09-28T10:30:00Z") // Date and time portfolio was last updated
+    "created_at": New Date("2021-09-24T10:30:00Z"), // Date and time portfolio was created
+    "updated_at": New Date("2021-09-28T10:30:00Z") // Date and time portfolio was last updated
  }
  //********after netting delete 614fd1a7d06a6fc2f7fcfd07 and 614fd1a7d06a6fc2f7fcfd08**************
 
  {
-    "_id": ObjectId("6158e8c53d1d64a48dbf13e3"), // Unique ID for the portfolio document
+    "_id": New ObjectId("6158e8c53d1d64a48dbf13e3"), // Unique ID for the portfolio document
     "name": "My Net FX Portfolio", // Name of the portfolio
     "description": "A portfolio containing a net FX trade", // Description of the portfolio
     "trades": [
        {
-          "_id": ObjectId("6158e7f73d1d64a48dbf13e2"), // Unique ID for the trade document
+          "_id": New ObjectId("6158e7f73d1d64a48dbf13e2"), // Unique ID for the trade document
           "type": "FX", // Type of trade
           "symbol": "EUR/GBP", // Currency pair symbol for net position
           "quantity": 5000, // Quantity of currency traded
           "direction": "buy", // Direction of trade (based on net position)
           "price": 0.8760, // Net price of trade
-          "date": ISODate("2021-10-01T10:00:00Z") // Date and time of trade execution
+          "date": New Date("2021-10-01T10:00:00Z") // Date and time of trade execution
        }
     ],
-    "created_at": ISODate("2021-09-24T10:30:00Z"), // Date and time portfolio was created
-    "updated_at": ISODate("2021-10-01T10:00:00Z") // Date and time portfolio was last updated
+    "created_at": New Date("2021-09-24T10:30:00Z"), // Date and time portfolio was created
+    "updated_at": New Date("2021-10-01T10:00:00Z") // Date and time portfolio was last updated
  }
