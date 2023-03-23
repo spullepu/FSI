@@ -1,3 +1,8 @@
+/* Position Keeping and Risk Management --sample schema only. 
+this is working in progress, numerical values are fabricated 
+
+*/
+
 //1. book a trade and delta hedge in a single document /eliminated multi-doc transaction
 {
     "_id": New ObjectId("<portfolio_id>"),
