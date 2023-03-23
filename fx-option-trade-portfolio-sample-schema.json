@@ -29,8 +29,7 @@
     ]
  }
  
- //2.  Exotics trades have 2 hedges, one for the delta and one for the vega
-//3. How about updates? downsize transaction 
+ //2.  Exotics trades have 2 hedges, one for the delta and one for the vega . How about updates? downsize transaction 
 
 {
     "_id": New ObjectId("<portfolio_id>"),
@@ -69,7 +68,7 @@
     ]
  }
 
- //4. Netting portfolio collection with multiple positions as documents. 
+ //3. Netting portfolio collection with multiple positions as documents. 
 //To atomically delete A and B and insert C, 
 //*******before netting************
 {
