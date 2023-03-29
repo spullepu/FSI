@@ -164,7 +164,7 @@ AND event_time = '2022-01-01 09:00:00.0000000'
 #### Results
 <img width="1558" alt="image" src="https://user-images.githubusercontent.com/30436793/228671352-3ce28b2d-64a2-4392-80e2-70bae412d674.png">
 
-#### Results
+
 
 
 
