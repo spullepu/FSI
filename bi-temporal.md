@@ -1,3 +1,6 @@
+# Introduction
+Here's an example implementation for a bi-temporal market data solution on SQL Server. While there are multiple ways to implement such a solution, this example uses a second table to track changes over time. This approach can be more efficient than tracking changes in a single table, especially as data volume increases and partitioning becomes necessary
+
 ## 1. Create market_data table with triggers for update and insert
 ```sql
 SET ANSI_NULLS ON
