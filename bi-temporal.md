@@ -145,9 +145,29 @@ BEGIN
 END
 GO
 ```
+## 3. Sample Queries
+```sql
+-- Insert initial market data
+INSERT INTO market_data (ticker, price, event_time, ingestion_time)
+VALUES ('AAPL', 100.00, '2022-01-01 09:00:00.0000000', SYSDATETIME())
+
+-- Trigger a price correction by inserting new market data with a different price
+INSERT INTO market_data (ticker, price, event_time, ingestion_time)
+VALUES ('AAPL', 120.00, '2022-01-02 09:00:00.0000000', SYSDATETIME())
+
+-- Update previous price in market_data table
+UPDATE market_data
+SET price = 120.00
+WHERE ticker = 'AAPL'
+AND event_time = '2022-01-01 09:00:00.0000000'
+```
+#### Results
+<img width="1558" alt="image" src="https://user-images.githubusercontent.com/30436793/228671352-3ce28b2d-64a2-4392-80e2-70bae412d674.png">
+
+#### Results
 
 
-<img width="1560" alt="image" src="https://user-images.githubusercontent.com/30436793/228670709-cba81048-4182-47be-a752-dbc434ff1103.png">
+
 
 
 
