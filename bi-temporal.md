@@ -58,7 +58,7 @@ ALTER TABLE [dbo].[market_data] ENABLE TRIGGER [trg_market_data_update]
 GO
 ```
 
-## 2. Create market_data_history table ### to track changes made to the data over time.
+## 2. Create market_data_history table to track changes made to the data over time.
 ```sql
 SET ANSI_NULLS ON
 GO
@@ -145,5 +145,9 @@ BEGIN
 END
 GO
 ```
+
+
+<img width="1560" alt="image" src="https://user-images.githubusercontent.com/30436793/228670709-cba81048-4182-47be-a752-dbc434ff1103.png">
+
 
 
