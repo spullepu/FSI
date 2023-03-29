@@ -84,6 +84,7 @@ ALTER TABLE [dbo].[market_data_history] ADD PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 
+
 ## 3. Create function to retrieve the latest market data
 ```
 SET ANSI_NULLS ON
@@ -104,6 +105,7 @@ BEGIN
    
 END
 GO
+
 
 ## 3. Create function to retrieve latest market data at a specific event time
 ```
