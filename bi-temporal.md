@@ -1,5 +1,5 @@
 ## 1. Create market_data table with triggers for update and insert
-```
+```sql
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -59,7 +59,7 @@ GO
 
 
 ## 2. Create market_data table with triggers for update and insert
-```
+```sql
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -86,7 +86,7 @@ GO
 
 
 ## 3. Create function to retrieve the latest market data
-```
+```sql
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -108,7 +108,7 @@ GO
 
 
 ## 3. Create function to retrieve latest market data at a specific event time
-```
+```sql
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
