@@ -1,0 +1,233 @@
+
+//
+1) Based on this https://developer.gs.com/docs/services/transaction-banking/pain001sample/ standard xml, create a pain-001-pacs collection manually 
+
+Identify its key components, and break down the document into smaller logical entities that can be stored in separate fields or sub-documents within MongoDB 
+
+{This allows for more efficient querying and retrieval of specific parts of the message, schema flexibility}
+
+2) Write a sample C# code to query this collection to retrieve the necessary data to create a payment initiation request standard
+
+3) Use an open-source library to convert this into XML 
+
+4) Show out-put in the iso20022 XML 
+//
+
+{
+  "Document": {
+    "_xmlns": "urn:iso:std:iso:20022:tech:xsd:pain.001.001.03",
+    "_xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "_xsi:schemaLocation": "urn:iso:std:iso:20022:tech:xsd:pain.001.001.03 file:///C:/pain.001.001.03.xsd",
+    "CstmrCdtTrfInitn": {
+      "GrpHdr": {
+        "MsgId": "431053",
+        "CreDtTm": "2022-03-11T01:33:49",
+        "NbOfTxs": "2",
+        "CtrlSum": "600.11",
+        "InitgPty": {
+          "Nm": "Initiating Party Name",
+          "Id": {
+            "OrgId": {
+              "Othr": {
+                "Id": "Party Id"
+              }
+            }
+          }
+        }
+      },
+      "PmtInf": [
+        {
+          "PmtInfId": "13036902",
+          "PmtMtd": "TRF",
+          "NbOfTxs": "2",
+          "CtrlSum": "200.00",
+          "PmtTpInf": {
+            "SvcLvl": {
+              "Cd": "MURG"
+            },
+            "LclInstrm": {
+              "Cd": "CTX"
+            },
+            "CtgyPurp": {
+              "Prtry": "Mortgage"
+            }
+          },
+          "ReqdExctnDt": "2022-03-11",
+          "Dbtr": {
+            "Nm": "Debtor Name",
+            "PstlAdr": {
+              "StrtNm": "Debtor Street Name",
+              "TwnNm": "Debtor Town Name",
+              "CtrySubDvsn": "Debtor country sub division",
+              "Ctry": "US"
+            },
+            "Id": {
+              "OrgId": {
+                "Othr": {
+                  "Id": "GS00005132"
+                }
+              }
+            },
+            "CtryOfRes": "US"
+          },
+          "DbtrAcct": {
+            "Id": {
+              "Othr": {
+                "Id": "Debtor Account Number"
+              }
+            },
+            "Ccy": "USD"
+          },
+          "DbtrAgt": {
+            "FinInstnId": {
+              "ClrSysMmbId": {
+                "ClrSysId": {
+                  "Cd": "USABA"
+                },
+                "MmbId": "026015079"
+              },
+              "PstlAdr": {
+                "Ctry": "US"
+              }
+            }
+          },
+          "CdtTrfTxInf": {
+            "PmtId": {
+              "EndToEndId": "Payment end to end Id"
+            },
+            "Amt": {
+              "InstdAmt": {
+                "_Ccy": "USD",
+                "_value": "200.00"
+              }
+            },
+            "CdtrAgt": {
+              "FinInstnId": {
+                "ClrSysMmbId": {
+                  "ClrSysId": {
+                    "Cd": "USABA"
+                  },
+                  "MmbId": "Clearing system Membership ID"
+                },
+                "PstlAdr": {
+                  "Ctry": "US"
+                }
+              }
+            },
+            "Cdtr": {
+              "Nm": "Creditor Account Name",
+              "PstlAdr": {
+                "Ctry": "US"
+              }
+            },
+            "CdtrAcct": {
+              "Id": {
+                "Othr": {
+                  "Id": "Creditor Account Number"
+                }
+              },
+              "Tp": {
+                "Cd": "CACC"
+              }
+            }
+          }
+        },
+        {
+          "PmtInfId": "13036906",
+          "PmtMtd": "TRF",
+          "CtrlSum": "200.00",
+          "PmtTpInf": {
+            "SvcLvl": {
+              "Cd": "MURG"
+            },
+            "LclInstrm": {
+              "Cd": "CTX"
+            },
+            "CtgyPurp": {
+              "Prtry": "Proprietary code"
+            }
+          },
+          "ReqdExctnDt": "2022-03-11",
+          "Dbtr": {
+            "Nm": "Debtor Name",
+            "PstlAdr": {
+              "StrtNm": "Street Name",
+              "TwnNm": "Town Name",
+              "CtrySubDvsn": "Country Sub Division",
+              "Ctry": "Country"
+            },
+            "Id": {
+              "OrgId": {
+                "Othr": {
+                  "Id": "GS00005134"
+                }
+              }
+            },
+            "CtryOfRes": "US"
+          },
+          "DbtrAcct": {
+            "Id": {
+              "Othr": {
+                "Id": "270008045186"
+              }
+            },
+            "Ccy": "USD"
+          },
+          "DbtrAgt": {
+            "FinInstnId": {
+              "ClrSysMmbId": {
+                "ClrSysId": {
+                  "Cd": "USABA"
+                },
+                "MmbId": "026015079"
+              },
+              "PstlAdr": {
+                "Ctry": "US"
+              }
+            }
+          },
+          "CdtTrfTxInf": {
+            "PmtId": {
+              "EndToEndId": "NSMGSB13036911"
+            },
+            "Amt": {
+              "InstdAmt": {
+                "_Ccy": "USD",
+                "_value": "400.11"
+              }
+            },
+            "CdtrAgt": {
+              "FinInstnId": {
+                "ClrSysMmbId": {
+                  "ClrSysId": {
+                    "Cd": "USABA"
+                  },
+                  "MmbId": "028000082"
+                },
+                "PstlAdr": {
+                  "Ctry": "US"
+                }
+              }
+            },
+            "Cdtr": {
+              "Nm": "Creditor Name",
+              "PstlAdr": {
+                "Ctry": "US"
+              }
+            },
+            "CdtrAcct": {
+              "Id": {
+                "Othr": {
+                  "Id": "31062765"
+                }
+              },
+              "Tp": {
+                "Cd": "CACC"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
