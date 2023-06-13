@@ -1,3 +1,4 @@
+/*
 NOTES
 1) Based on this https://developer.gs.com/docs/services/transaction-banking/pain001sample/ standard xml, create a pain-001-pacs collection manually 
 
@@ -11,6 +12,7 @@ Identify its key components, and break down the document into smaller logical en
 
 4) Show out-put in the iso20022 XML 
 
+*/
 
 {
   "Document": {
